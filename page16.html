@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page 16 — The Future | Shristi's 24th 🌸</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@400;700&family=Lato:wght@300;400&display=swap"
+      rel="stylesheet" />
+    <style>
+    :root{--rose:#e8698a;--deep:#c0395a;--gold:#f7c873;--dark:#0f050a;}
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{background:var(--dark); min-height:100vh; font-family:'Lato',sans-serif; color:white; overflow-x:hidden; display:flex; flex-direction:column; align-items:center;}
+    
+    #stars{position:fixed; top:0; left:0; width:100%; height:100%; z-index:0;}
+    .star{position:absolute; border-radius:50%; background:white; animation:twinkle var(--d) infinite alternate;}
+    @keyframes twinkle{from{opacity:0.2; transform:scale(1)}to{opacity:0.8; transform:scale(1.2)}}
+
+    .page-header{position:relative; z-index:2; text-align:center; padding:3rem 1rem;}
+    .page-title{font-family:'Playfair Display',serif; font-size:clamp(2rem,6vw,3.5rem); color:var(--gold);}
+
+    .crystal-container {
+      position: relative; z-index: 2; width: 300px; height: 300px;
+      margin: 1rem auto; display: flex; align-items: center; justify-content: center;
+    }
+
+    .crystal-ball {
+      width: 200px; height: 200px; border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #ffffff 0%, #e8698a 30%, #6e1d34 70%, #1a0a10 100%);
+      box-shadow: 0 0 50px rgba(232,105,138,0.4), inset 0 0 30px rgba(255,255,255,0.3);
+      position: relative; cursor: pointer; transition: 0.5s;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .crystal-ball:active { transform: scale(0.95); }
+    
+    /* Glowing effect when active */
+    .crystal-ball.glow {
+      animation: magic-pulse 1s ease-out;
+    }
+    @keyframes magic-pulse {
+      0% { box-shadow: 0 0 50px var(--rose); }
+      50% { box-shadow: 0 0 100px var(--gold); }
+      100% { box-shadow: 0 0 50px var(--rose); }
+    }
+
+    .ball-base {
+      position: absolute; bottom: 40px; width: 140px; height: 40px;
+      background: linear-gradient(to right, #444, #111, #444);
+      border-radius: 20px; z-index: -1; border-top: 3px solid var(--gold);
+    }
+
+    .fortune-box {
+      min-height: 100px; margin-top: 1rem; width: 85%; max-width: 500px;
+      text-align: center; font-family: 'Dancing Script', cursive;
+      font-size: 1.6rem; color: var(--gold); z-index: 2;
+      padding: 1.5rem; border-radius: 15px; background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(5px); border: 1px solid rgba(247,200,115,0.2);
+      opacity: 0; transform: translateY(10px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .fortune-box.show { opacity: 1; transform: translateY(0); }
+
+    .nav-row{position:relative; z-index:2; display:flex; gap:1rem; padding: 3rem 1rem;}
+    .nav-btn{padding:0.8rem 2rem; border-radius:50px; font-family:'Dancing Script',cursive; font-size:1.2rem; text-decoration:none; transition:0.2s;}
+    .nav-btn.home{background:rgba(255,255,255,0.08); color:white; border:1px solid rgba(255,255,255,0.2);}
+    .nav-btn.next{background:linear-gradient(135deg,var(--rose),var(--deep)); color:white;}
+    </style>
+  </head>
+  <body>
+
+    <div id="stars"></div>
+
+    <header class="page-header">
+      <p
+        style="color:var(--rose); font-family:'Dancing Script'; font-size: 1.2rem;">✨
+        Surprise #16 ✨</p>
+      <h1 class="page-title">The Crystal of Destiny 🔮</h1>
+      <p style="margin-top:10px; opacity: 0.8;">Tap the ball to peek into our
+        future...</p>
+    </header>
+
+    <div class="crystal-container">
+      <div class="crystal-ball" id="ball" onclick="revealFortune()"></div>
+      <div class="ball-base"></div>
+    </div>
+
+    <div class="fortune-box" id="fortuneBox">
+    </div>
+
+    <div class="nav-row">
+      <a href="index.html" class="nav-btn home">🏠 Home</a>
+      <a href="page17.html" class="nav-btn next">Next Surprise → 🌸</a>
+    </div>
+
+    <script>
+    const fortunes = [
+      "I see a morning where we wake up in a house filled with sunlight and the smell of coffee. ☕✨",
+      "The stars predict a trip where we get lost in a city we can't pronounce, and it becomes our favorite memory. 🗺️✈️",
+      "I see thousands of shared smiles, and one of them is from our 50th anniversary. 👵👴❤️",
+      "Our future holds a rainy night, a warm blanket, and a movie we've already seen ten times. 🍿🌧️",
+      "I see you achieving every dream you've ever had, with me cheering the loudest in the front row. 🌟👏",
+      "The crystal reveals a lifetime of 'I'm home' always being said to each other. 🏠💞"
+    ];
+
+    function revealFortune() {
+      const box = document.getElementById('fortuneBox');
+      const ball = document.getElementById('ball');
+      const randomFortune = fortunes[Math.floor(Math.random() * fortunes.length)];
+      
+      // Add magic glow animation
+      ball.classList.remove('glow');
+      void ball.offsetWidth; // Trigger reflow to restart animation
+      ball.classList.add('glow');
+
+      // Hide box first for a smooth fade-in
+      box.classList.remove('show');
+      
+      setTimeout(() => {
+        box.innerText = randomFortune;
+        box.classList.add('show');
+      }, 300);
+    }
+
+    // Star Background
+    const se = document.getElementById('stars');
+    for(let i=0; i<100; i++) {
+      const s = document.createElement('div');
+      s.className = 'star';
+      const sz = Math.random() * 2 + 1;
+      s.style.cssText = `width:${sz}px; height:${sz}px; top:${Math.random()*100}%; left:${Math.random()*100}%; --d:${Math.random()*3+2}s; animation-delay:${Math.random()*5}s;`;
+      se.appendChild(s);
+    }
+    </script>
+  </body>
+</html>

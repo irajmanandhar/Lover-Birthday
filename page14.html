@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page 14 — Places We Will Go | Shristi's 24th 🌸</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@400;700&family=Lato:wght@300;400&display=swap"
+      rel="stylesheet" />
+    <style>
+    :root{--rose:#e8698a;--deep:#c0395a;--gold:#f7c873;--dark:#1a0a10;}
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{background:var(--dark);min-height:100vh;font-family:'Lato',sans-serif;color:white;overflow-x:hidden;display:flex;flex-direction:column;align-items:center;}
+    
+    /* Theme Effects */
+    #stars{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden;}
+    .star{position:absolute;border-radius:50%;background:white;animation:twinkle var(--d) ease-in-out infinite alternate;}
+    @keyframes twinkle{from{opacity:0.1}to{opacity:0.95}}
+    #petals{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;overflow:hidden;}
+    .petal{position:absolute;top:-40px;animation:fall linear infinite;pointer-events:none;}
+    @keyframes fall{0%{transform:translateY(-50px) rotate(0deg);opacity:1}100%{transform:translateY(110vh) rotate(720deg);opacity:0}}
+
+    .page-header{position:relative;z-index:2;text-align:center;padding:3rem 2rem 1rem;animation:fadeUp 0.8s ease forwards;}
+    .page-num{font-family:'Dancing Script',cursive;font-size:1.1rem;color:var(--gold);letter-spacing:2px;}
+    .page-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,7vw,4rem);background:linear-gradient(135deg,#f8c8d8,var(--rose),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-top:0.3rem;}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:translateY(0)}}
+    
+    .card{position:relative;z-index:2;max-width:720px;width:90%;margin:1.5rem auto;background:rgba(255,255,255,0.04);border:1px solid rgba(232,105,138,0.3);border-radius:20px;padding:2.5rem;backdrop-filter:blur(8px);box-shadow:0 20px 60px rgba(232,105,138,0.12);animation:fadeUp 0.9s ease forwards;animation-delay:0.3s;opacity:0;}
+    .prose{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1rem,2.2vw,1.15rem);line-height:1.8;color:rgba(255,255,255,0.9);text-align: center;}
+    .gold-text{font-family:'Dancing Script',cursive;color:var(--gold);font-size:1.3rem; text-align: center; display: block;}
+    
+    .map-container { margin: 1.5rem 0; border-radius: 15px; overflow: hidden; border: 1px solid rgba(247,200,115,0.3); box-shadow: 0 0 20px rgba(232,105,138,0.2); }
+    .map-img { width: 100%; display: block; filter: sepia(0.3) hue-rotate(-10deg); }
+
+    .bucket-list { display: grid; gap: 0.8rem; margin-top: 1.5rem; }
+    .list-item { display: flex; align-items: center; gap: 1rem; background: rgba(255,255,255,0.05); border-radius: 12px; padding: 1rem; border: 1px solid rgba(232,105,138,0.15); transition: 0.3s; }
+    .list-item:hover { transform: translateX(10px); background: rgba(232,105,138,0.1); border-color: var(--rose); }
+    .list-item span:first-child { font-size: 1.5rem; }
+    .list-item span:last-child { font-family: 'Playfair Display', serif; font-style: italic; color: rgba(255,255,255,0.85); }
+
+    .refresh-btn { display: block; margin: 2rem auto 0; padding: 0.6rem 1.5rem; background: transparent; border: 1px solid var(--gold); color: var(--gold); font-family: 'Dancing Script', cursive; font-size: 1.2rem; border-radius: 50px; cursor: pointer; transition: 0.3s; }
+    .refresh-btn:hover { background: var(--gold); color: var(--dark); }
+
+    .nav-row{position:relative;z-index:2;display:flex;gap:1rem;justify-content:center;padding:2rem 1rem 5rem;flex-wrap:wrap;}
+    .nav-btn{padding:0.8rem 2rem;border-radius:50px;font-family:'Dancing Script',cursive;font-size:1.2rem;text-decoration:none;transition:0.2s;border:none;cursor:pointer;}
+    .nav-btn.home{background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.2);}
+    .nav-btn.next{background:linear-gradient(135deg,var(--rose),var(--deep));color:white;box-shadow:0 5px 20px rgba(232,105,138,0.4);}
+  </style>
+  </head>
+  <body>
+    <div id="stars"></div>
+    <div id="petals"></div>
+    <audio id="bgm" loop><source src="Die_with_a_smile.mp3"
+        type="audio/mpeg"></audio>
+
+    <header class="page-header">
+      <p class="page-num">✨ Surprise #14 of 24 ✨</p>
+      <h1 class="page-title">Places We Will Go 🗺️</h1>
+    </header>
+
+    <div class="card">
+      <span class="gold-text">My only destination is wherever you are...</span>
+
+      <div class="map-container">
+        <img
+          src="https://images.unsplash.com/photo-1526772662000-3f88f10405ff?auto=format&fit=crop&q=80&w=800"
+          alt="World Map" class="map-img">
+      </div>
+
+      <div class="prose">
+        <p>Kaali, I don't care if it's a bustling city or a quiet mountain peak.
+          I want to go <b>everywhere</b> with you. As long as I'm holding your
+          hand, every coordinate on this map is home.</p>
+      </div>
+
+      <div class="bucket-list" id="bucketList">
+      </div>
+
+      <button class="refresh-btn" onclick="generateDestinations()">✨ Dream
+        Another Dream</button>
+
+      <div class="hearts" style="margin-top:2rem;">🗺️ 💗 🌍 💗 🗺️</div>
+    </div>
+
+    <div class="nav-row">
+      <a href="index.html" class="nav-btn home">🏠 Home</a>
+      <a href="page15.html" class="nav-btn next">Next Surprise → 🌸</a>
+    </div>
+
+    <script>
+    const allDreams = [
+        {emoji: "🏔️", text: "Watching the sunrise from the Himalayas"},
+        {emoji: "🗼", text: "A romantic walk under the Eiffel Tower"},
+        {emoji: "🌊", text: "Waking up in an overwater bungalow in Maldives"},
+        {emoji: "🍣", text: "Eating authentic sushi in the streets of Tokyo"},
+        {emoji: "🏜️", text: "Stargazing in the middle of the Sahara Desert"},
+        {emoji: "🇮🇹", text: "Eating too much pasta on a balcony in Italy"},
+        {emoji: "🛖", text: "Finding a hidden cottage in the Swiss Alps"},
+        {emoji: "🌌", text: "Chasing the Northern Lights in Iceland"},
+        {emoji: "🛶", text: "A quiet gondola ride through Venice"},
+        {emoji: "☕", text: "Rainy days in a cozy London cafe"},
+        {emoji: "🌺", text: "Watching fire dancers in Bali"},
+        {emoji: "🏛️", text: "Exploring the ancient ruins of Greece"}
+    ];
+
+    function generateDestinations() {
+        const list = document.getElementById('bucketList');
+        list.style.opacity = 0;
+        
+        setTimeout(() => {
+            list.innerHTML = '';
+            // Shuffle and pick 5 random dreams
+            const shuffled = [...allDreams].sort(() => 0.5 - Math.random());
+            const selected = shuffled.slice(0, 5);
+
+            selected.forEach(dream => {
+                const item = document.createElement('div');
+                item.className = 'list-item';
+                item.innerHTML = `<span>${dream.emoji}</span><span>${dream.text}</span>`;
+                list.appendChild(item);
+            });
+            list.style.opacity = 1;
+        }, 300);
+    }
+
+    // Initial load
+    generateDestinations();
+
+    // Theme Effects
+    (function(){
+      var se=document.getElementById('stars');
+      for(var i=0;i<120;i++){
+        var s=document.createElement('div'); s.className='star';
+        var sz=(Math.random()*2+0.5);
+        s.style.cssText='width:'+sz+'px;height:'+sz+'px;top:'+(Math.random()*100)+'%;left:'+(Math.random()*100)+'%;--d:'+(Math.random()*3+1).toFixed(1)+'s;animation-delay:'+(Math.random()*5).toFixed(1)+'s;';
+        se.appendChild(s);
+      }
+      var pe=document.getElementById('petals');
+      var em=['🌸','✨','💗','🌹'];
+      for(var j=0;j<18;j++){
+        var p=document.createElement('div'); p.className='petal';
+        p.textContent=em[Math.floor(Math.random()*em.length)];
+        p.style.cssText='left:'+(Math.random()*100)+'%;animation-duration:'+(Math.random()*8+6).toFixed(1)+'s;animation-delay:'+(Math.random()*12).toFixed(1)+'s;';
+        pe.appendChild(p);
+      }
+      var audio=document.getElementById('bgm'), playing=false;
+      document.addEventListener('click',function(){
+        if(!playing){ audio.play(); playing=true; }
+      },{once:true});
+    })();
+    </script>
+  </body>
+</html>

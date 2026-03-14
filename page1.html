@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Page 1 — A Letter to Shristi 💌</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@400;700&family=Lato:wght@300;400&display=swap"
+            rel="stylesheet" />
+        <style>
+        :root { --rose:#e8698a; --gold:#f7c873; --dark:#1a0a10; }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { background:var(--dark); min-height:100vh; display:flex; flex-direction:column; align-items:center; font-family:'Lato',sans-serif; overflow-x:hidden; }
+
+        /* Background Elements */
+        #stars { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0; }
+        #petals { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:1; }
+        
+        /* Star Animation */
+        .star { position:absolute; border-radius:50%; background:white; animation:twinkle var(--d) ease-in-out infinite alternate; }
+        @keyframes twinkle { from{opacity:0.1} to{opacity:0.9} }
+
+        /* Petal/Flower Animation */
+        .petal { position:absolute; top:-50px; pointer-events:none; animation:fall linear infinite; color: white; }
+        @keyframes fall {
+            0% { transform: translateY(-50px) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+        }
+
+        /* Header & Content */
+        .page-header { position:relative; z-index:2; text-align:center; padding:3rem 2rem 1.5rem; animation:fadeUp 1s ease forwards; }
+        @keyframes fadeUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+        .page-num { font-family:'Dancing Script',cursive; font-size:1.1rem; color:var(--gold); letter-spacing:2px; }
+        .page-title { font-family:'Playfair Display',serif; font-size:clamp(2.5rem,7vw,4.5rem); background:linear-gradient(135deg,#f8c8d8,var(--rose),var(--gold)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+        
+        .letter-wrap { position:relative; z-index:2; max-width:680px; width:90%; margin:2rem auto 5rem; animation:fadeUp 1.2s ease forwards; animation-delay:0.4s; opacity:0; }
+        .letter-card { background:rgba(255,255,255,0.04); border:1px solid rgba(232,105,138,0.3); border-radius:20px; padding:3rem 3.5rem; backdrop-filter:blur(10px); box-shadow:0 20px 60px rgba(232,105,138,0.15); position:relative; overflow:hidden; }
+        .letter-card::before { content:'💌'; position:absolute; top:-20px; right:30px; font-size:5rem; opacity:0.07; pointer-events:none; }
+        
+        .letter-date { font-family:'Dancing Script',cursive; color:var(--gold); font-size:1.1rem; margin-bottom:1.5rem; }
+        .letter-body { font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(1rem,2.2vw,1.18rem); line-height:2; color:rgba(255,255,255,0.88); }
+        .letter-body p { margin-bottom:1.3rem; }
+        .letter-sign { margin-top:2rem; font-family:'Dancing Script',cursive; font-size:1.6rem; color:var(--rose); text-align:right; }
+
+        /* Navigation */
+        .nav-row { position:relative; z-index:2; display:flex; gap:1rem; justify-content:center; padding-bottom:4rem; flex-wrap:wrap; }
+        .nav-btn { padding:0.8rem 2rem; border-radius:50px; font-family:'Dancing Script',cursive; font-size:1.2rem; text-decoration:none; transition:transform 0.2s,box-shadow 0.2s; }
+        .nav-btn.home { background:rgba(255,255,255,0.08); color:rgba(255,255,255,0.7); border:1px solid rgba(255,255,255,0.2); }
+        .nav-btn.next { background:linear-gradient(135deg,var(--rose),#c0395a); color:white; box-shadow:0 5px 20px rgba(232,105,138,0.4); }
+        .nav-btn:hover { transform:translateY(-3px); box-shadow:0 10px 30px rgba(232,105,138,0.5); }
+    </style>
+    </head>
+    <body>
+        <div id="stars"></div>
+        <div id="petals"></div>
+
+        <header class="page-header">
+            <p class="page-num">✨ Surprise #1 of 24 ✨</p>
+            <h1 class="page-title">A Letter to You 💌</h1>
+        </header>
+
+        <div class="letter-wrap">
+            <div class="letter-card">
+                <p class="letter-date">On the day you turn 24…</p>
+                <div class="letter-body">
+                    <p>My dearest Shristi,</p>
+                    <p>Today you turn 24, and I find myself overwhelmed with
+                        gratitude that I get to be the person standing beside
+                        you. You make every day brighter.</p>
+                    <p>From the first time I saw you, I knew there was something
+                        extraordinary about you. The more I know you, the more I
+                        fall in love with every little piece of you.</p>
+                    <p>You are my calm, my laughter, and my home. Kaali, you are
+                        the most beautiful person I know — inside and out.</p>
+                    <p>I made this little world of 24 surprises to tell you what
+                        I sometimes struggle to say out loud: I love you more
+                        than words could ever hold.</p>
+                    <p
+                        style="text-align:center;font-size:1.8rem;letter-spacing:6px;">💗
+                        💖 💗 💖 💗</p>
+                </div>
+                <p class="letter-sign">— Always yours, Iru 🌸</p>
+            </div>
+        </div>
+
+        <div class="nav-row">
+            <a href="index.html" class="nav-btn home">🏠 Home</a>
+            <a href="page2.html" class="nav-btn next">Next Surprise → 🌅</a>
+        </div>
+
+        <script>
+        // Star Generator
+        const se = document.getElementById('stars');
+        for (let i = 0; i < 130; i++) {
+            const s = document.createElement('div');
+            s.className = 'star';
+            const sz = Math.random() * 2.5 + 0.5;
+            s.style.cssText = `width:${sz}px; height:${sz}px; top:${Math.random() * 100}%; left:${Math.random() * 100}%; --d:${(Math.random() * 3 + 1.5).toFixed(1)}s; animation-delay:${(Math.random() * 4).toFixed(1)}s;`;
+            se.appendChild(s);
+        }
+
+        // Petal/Flower Generator
+        const pe = document.getElementById('petals');
+        const emojis = ['🌸', '✨', '💗', '🤍', '🌷'];
+        for (let j = 0; j < 20; j++) {
+            const p = document.createElement('div');
+            p.className = 'petal';
+            p.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            p.style.left = Math.random() * 100 + '%';
+            p.style.animationDuration = (Math.random() * 5 + 5) + 's';
+            p.style.animationDelay = Math.random() * 10 + 's';
+            p.style.fontSize = (Math.random() * 1 + 0.8) + 'rem';
+            pe.appendChild(p);
+        }
+    </script>
+    </body>
+</html>

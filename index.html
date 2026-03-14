@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy 24th Birthday, Shristi 🌸</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@400;700&family=Lato:wght@300;400&display=swap"
+      rel="stylesheet" />
+    <style>
+    :root {
+      --rose: #e8698a;
+      --deep-rose: #c0395a;
+      --gold: #f7c873;
+      --dark: #1a0a10;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--dark);
+      color: white;
+      font-family: 'Lato', sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* ─── STARFIELD ─── */
+    #stars {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none; z-index: 0;
+      overflow: hidden;
+    }
+    .star {
+      position: absolute;
+      border-radius: 50%;
+      background: white;
+      animation: twinkle var(--d) ease-in-out infinite alternate;
+    }
+    @keyframes twinkle { from { opacity: 0.1; } to { opacity: 1; } }
+
+    /* ─── FLOATING PETALS ─── */
+    .petal {
+      position: fixed;
+      top: -40px;
+      font-size: 1.4rem;
+      animation: fall linear infinite;
+      pointer-events: none;
+      z-index: 1;
+    }
+    @keyframes fall {
+      0%   { transform: translateY(-50px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+    }
+
+    /* ─── HERO SECTION ─── */
+    .hero {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .hero-glow {
+      position: absolute;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(232,105,138,0.25) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: pulse 4s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.7; }
+      50% { transform: scale(1.15); opacity: 1; }
+    }
+
+    .subtitle-top {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      color: var(--gold);
+      letter-spacing: 2px;
+      animation: fadeDown 1s ease forwards;
+      opacity: 0;
+      animation-delay: 0.3s;
+    }
+
+    .main-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 10vw, 7rem);
+      font-weight: 700;
+      line-height: 1.1;
+      background: linear-gradient(135deg, #f8c8d8, #e8698a, #f7c873, #e8698a);
+      background-size: 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 4s linear infinite, fadeUp 1s ease forwards;
+      animation-delay: 0s, 0.6s;
+      opacity: 0;
+      margin: 0.3rem 0;
+    }
+    @keyframes shimmer { 0% { background-position: 0%; } 100% { background-position: 300%; } }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+
+    .age-badge {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(2rem, 6vw, 4rem);
+      color: var(--gold);
+      animation: fadeUp 1s ease forwards;
+      animation-delay: 0.9s;
+      opacity: 0;
+    }
+
+    .from-iru {
+      margin-top: 1.2rem;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      color: rgba(255,255,255,0.7);
+      animation: fadeUp 1s ease forwards;
+      animation-delay: 1.2s;
+      opacity: 0;
+    }
+
+    .hearts-row {
+      margin: 1.5rem 0;
+      font-size: 2rem;
+      animation: fadeUp 1s ease forwards;
+      animation-delay: 1.5s;
+      opacity: 0;
+      letter-spacing: 8px;
+    }
+
+    .open-btn {
+      margin-top: 2rem;
+      padding: 1.1rem 3rem;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.5rem;
+      background: linear-gradient(135deg, var(--rose), var(--deep-rose));
+      color: white;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 0 30px rgba(232,105,138,0.5);
+      animation: fadeUp 1s ease forwards, glow-btn 3s ease-in-out infinite;
+      animation-delay: 1.8s, 2.5s;
+      opacity: 0;
+      transition: transform 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .open-btn:hover { transform: scale(1.07); }
+    @keyframes glow-btn {
+      0%, 100% { box-shadow: 0 0 30px rgba(232,105,138,0.5); }
+      50% { box-shadow: 0 0 60px rgba(232,105,138,0.9); }
+    }
+
+    /* ─── DOORS SECTION ─── */
+    .doors-section {
+      position: relative; z-index: 2;
+      padding: 4rem 2rem 6rem;
+      text-align: center;
+    }
+    .doors-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 4vw, 2.8rem);
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+    .doors-subtitle {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.3rem;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 3rem;
+    }
+
+    .doors-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 1.5rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .door-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(232,105,138,0.3);
+      border-radius: 12px;
+      aspect-ratio: 1/1; /* Keeps doors square */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    .door-card:hover {
+      background: rgba(232,105,138,0.15);
+      border-color: var(--rose);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(232,105,138,0.3);
+    }
+    .door-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--rose);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      position: relative; z-index: 2;
+      text-align: center;
+      padding: 2rem;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.3rem;
+      color: rgba(255,255,255,0.4);
+    }
+  </style>
+  </head>
+  <body>
+
+    <div id="stars"></div>
+    <div id="petals-container"></div>
+
+    <section class="hero">
+      <div class="hero-glow"></div>
+      <p class="subtitle-top">✨ A gift from Iru, with all his heart ✨</p>
+      <h1 class="main-title">Happy Birthday<br />Shristi</h1>
+      <p class="age-badge">24 years of magic 🌸</p>
+      <p class="from-iru">My dearest Kaali — this whole world is yours
+        today.</p>
+      <div class="hearts-row">💗 💖 💗 💖 💗</div>
+      <a href="#doors" class="open-btn">Open Your 24 Surprises 🎁</a>
+    </section>
+
+    <section class="doors-section" id="doors">
+      <h2 class="doors-title">24 Doors for 24 Years</h2>
+      <p class="doors-subtitle">Each one holds something special, just for
+        you…</p>
+      <div class="doors-grid" id="doorsGrid"></div>
+    </section>
+
+    <footer>Made with 💗 by Iru · For Kaali · Always &amp; Forever</footer>
+
+    <script>
+  /* ── Stars ── */
+  const starsEl = document.getElementById('stars');
+  for (let i = 0; i < 160; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const sz = Math.random() * 2.5 + 0.5;
+    s.style.cssText = `
+      width:${sz}px; height:${sz}px;
+      top:${Math.random()*100}%;
+      left:${Math.random()*100}%;
+      --d:${(Math.random()*3+1.5).toFixed(1)}s;
+      animation-delay:${(Math.random()*4).toFixed(1)}s;
+    `;
+    starsEl.appendChild(s);
+  }
+
+  /* ── Petals ── */
+  const petalEmojis = ['🌸','🌺','🌹','💮','🌷','💐'];
+  const pc = document.getElementById('petals-container');
+  for (let i = 0; i < 22; i++) {
+    const p = document.createElement('div');
+    p.className = 'petal';
+    p.textContent = petalEmojis[Math.floor(Math.random()*petalEmojis.length)];
+    p.style.cssText = `
+      left:${Math.random()*100}%;
+      animation-duration:${(Math.random()*8+6).toFixed(1)}s;
+      animation-delay:${(Math.random()*10).toFixed(1)}s;
+      font-size:${(Math.random()*1.2+0.8).toFixed(1)}rem;
+    `;
+    pc.appendChild(p);
+  }
+
+  /* ── Generate 24 Doors ── */
+  const grid = document.getElementById('doorsGrid');
+  for (let i = 1; i <= 24; i++) {
+    const a = document.createElement('a');
+    a.className = 'door-card';
+    a.href = `page${i}.html`;
+    a.innerHTML = `<div class="door-num">${i}</div>`;
+    grid.appendChild(a);
+  }
+
+  /* ── Smooth scroll ── */
+  document.querySelector('.open-btn').addEventListener('click', e => {
+    e.preventDefault();
+    document.getElementById('doors').scrollIntoView({ behavior: 'smooth' });
+  });
+</script>
+  </body>
+</html>

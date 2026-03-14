@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page 19 — What Makes You Amazing | Shristi's 24th 🌸</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@400;700&family=Lato:wght@300;400&display=swap"
+      rel="stylesheet" />
+    <style>
+    :root{--rose:#e8698a;--deep:#c0395a;--gold:#f7c873;--dark:#1a0a10;}
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{background:var(--dark);min-height:100vh;font-family:'Lato',sans-serif;color:white;overflow-x:hidden;display:flex;flex-direction:column;align-items:center;}
+    
+    #stars{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;}
+    .star{position:absolute;border-radius:50%;background:white;animation:twinkle var(--d) ease-in-out infinite alternate;}
+    @keyframes twinkle{from{opacity:0.1}to{opacity:0.95}}
+
+    .page-header{position:relative;z-index:2;text-align:center;padding:3rem 2rem 1rem;}
+    .page-num{font-family:'Dancing Script',cursive;font-size:1.1rem;color:var(--gold);letter-spacing:2px;}
+    .page-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,7vw,4rem);background:linear-gradient(135deg,#f8c8d8,var(--rose),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+    .instruction { color: var(--gold); font-family: 'Dancing Script', cursive; margin-bottom: 2rem; z-index: 2; font-size: 1.2rem;}
+
+    /* Card Flip Logic */
+    .compliment-grid {
+      position: relative; z-index: 2;
+      display: grid; grid-template-columns: 1fr;
+      gap: 1rem; width: 90%; max-width: 500px; margin-bottom: 3rem;
+    }
+
+    .flip-card {
+      background-color: transparent;
+      height: 80px;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+
+    .flip-card-inner {
+      position: relative; width: 100%; height: 100%;
+      text-align: center; transition: transform 0.6s;
+      transform-style: preserve-3d;
+    }
+
+    .flip-card.flipped .flip-card-inner { transform: rotateX(180deg); }
+
+    .flip-card-front, .flip-card-back {
+      position: absolute; width: 100%; height: 100%;
+      -webkit-backface-visibility: hidden; backface-visibility: hidden;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 15px; padding: 0 1rem;
+    }
+
+    .flip-card-front {
+      background: rgba(232, 105, 138, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: var(--gold); font-family: 'Dancing Script', cursive; font-size: 1.4rem;
+    }
+
+    .flip-card-back {
+      background: linear-gradient(135deg, rgba(232,105,138,0.2), rgba(192,57,90,0.4));
+      border: 1px solid var(--rose);
+      color: white; transform: rotateX(180deg);
+      font-family: 'Playfair Display', serif; font-style: italic;
+    }
+
+    .nav-row{position:relative;z-index:2;display:flex;gap:1rem;justify-content:center;padding:2rem 1rem 5rem;}
+    .nav-btn{padding:0.8rem 2rem;border-radius:50px;font-family:'Dancing Script',cursive;font-size:1.2rem;text-decoration:none;transition:0.2s;border:none;cursor:pointer;}
+    .nav-btn.home{background:rgba(255,255,255,0.08);color:white;border:1px solid rgba(255,255,255,0.2);}
+    .nav-btn.next{background:linear-gradient(135deg,var(--rose),var(--deep));color:white;}
+  </style>
+  </head>
+  <body>
+
+    <div id="stars"></div>
+
+    <header class="page-header">
+      <p class="page-num">✨ Surprise #19 of 24 ✨</p>
+      <h1 class="page-title">What Makes You Amazing 🌻</h1>
+    </header>
+
+    <p class="instruction">Tap the cards to reveal the truth...</p>
+
+    <div class="compliment-grid">
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">✨ Reason #1</div>
+          <div class="flip-card-back">Your resilience. You handle challenges
+            with such grace.</div>
+        </div>
+      </div>
+
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">✨ Reason #2</div>
+          <div class="flip-card-back">Your eyes. They sparkle when you talk
+            about things you love.</div>
+        </div>
+      </div>
+
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">✨ Reason #3</div>
+          <div class="flip-card-back">The way you listen. You make people feel
+            truly seen.</div>
+        </div>
+      </div>
+
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">✨ Reason #4</div>
+          <div class="flip-card-back">Your chaotic energy. It’s the light of
+            every room.</div>
+        </div>
+      </div>
+
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">✨ Reason #5</div>
+          <div class="flip-card-back">Your heart. You care so deeply for those
+            around you.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <a href="index.html" class="nav-btn home">🏠 Home</a>
+      <a href="page20.html" class="nav-btn next">Next Surprise → 🌸</a>
+    </div>
+
+    <script>
+  (function(){
+    var se=document.getElementById('stars');
+    for(var i=0; i<120; i++){
+      var s=document.createElement('div'); s.className='star';
+      var sz=(Math.random()*2+0.5);
+      s.style.cssText='width:'+sz+'px;height:'+sz+'px;top:'+(Math.random()*100)+'%;left:'+(Math.random()*100)+'%;--d:'+(Math.random()*3+1.5).toFixed(1)+'s;animation-delay:'+(Math.random()*5).toFixed(1)+'s;';
+      se.appendChild(s);
+    }
+    
+    var audio = new Audio('Die_with_a_smile.mp3');
+    audio.loop = true;
+    document.addEventListener('click', () => { audio.play().catch(()=>{}); }, {once: true});
+  })();
+</script>
+
+  </body>
+</html>

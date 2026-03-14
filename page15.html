@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Page 15 — Catch My Love! | Shristi's 24th 🌸</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@700&family=Lato:wght@400&display=swap"
+      rel="stylesheet" />
+    <style>
+    :root{--rose:#e8698a;--gold:#f7c873;--dark:#1a0a10;}
+    *{margin:0;padding:0;box-sizing:border-box; touch-action: none;}
+    body{background:var(--dark); min-height:100vh; font-family:'Lato',sans-serif; color:white; overflow:hidden; display:flex; flex-direction:column; align-items:center;}
+    
+    #game-container {
+      position: relative; width: 100vw; height: 70vh;
+      background: rgba(255,255,255,0.03); border-bottom: 2px solid var(--rose);
+      overflow: hidden; cursor: crosshair;
+    }
+
+    #player {
+      position: absolute; bottom: 20px; left: 50%;
+      width: 80px; height: 80px; transform: translateX(-50%);
+      font-size: 50px; display: flex; align-items: center; justify-content: center;
+      z-index: 10; transition: transform 0.1s;
+    }
+
+    .falling-item {
+      position: absolute; font-size: 30px; z-index: 5;
+    }
+
+    .ui-layer {
+      padding: 1rem; text-align: center; z-index: 20;
+    }
+    .score { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--gold); }
+    .goal { font-family: 'Dancing Script', cursive; color: var(--rose); font-size: 1.2rem; margin-bottom: 10px;}
+
+    .nav-row{ display:flex; gap:1rem; padding: 1.5rem; z-index: 100;}
+    .nav-btn{ padding:0.8rem 1.5rem; border-radius:50px; font-family:'Dancing Script',cursive; font-size:1.1rem; text-decoration:none; color: white; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.08);}
+    .nav-btn.next{ background:linear-gradient(135deg,var(--rose),var(--deep)); border:none; display: none;}
+  </style>
+  </head>
+  <body>
+
+    <div class="ui-layer">
+      <p style="color:var(--gold); letter-spacing: 2px;">SURPRISE #15</p>
+      <h1 style="font-family:'Playfair Display'; margin-bottom: 5px;">Catch My
+        Love! 💝</h1>
+      <p class="goal">Catch 10 items to unlock the next surprise!</p>
+      <div class="score">Score: <span id="scoreVal">0</span> / 10</div>
+    </div>
+
+    <div id="game-container">
+      <div id="player">👨🏻‍💻</div> </div>
+
+    <div class="nav-row">
+      <a href="index.html" class="nav-btn">🏠 Home</a>
+      <a href="page16.html" id="nextPage" class="nav-btn next">You Win! Next
+        Surprise → 🌸</a>
+    </div>
+
+    <script>
+  const container = document.getElementById('game-container');
+  const player = document.getElementById('player');
+  const scoreVal = document.getElementById('scoreVal');
+  const nextBtn = document.getElementById('nextPage');
+  
+  let score = 0;
+  const items = ['🌸', '💖', '☕', '🍕', '✈️', '💍', '🍫', '🍦'];
+
+  // Move Player with Mouse/Touch
+  container.addEventListener('mousemove', (e) => {
+    let x = e.clientX;
+    player.style.left = x + 'px';
+  });
+
+  container.addEventListener('touchmove', (e) => {
+    let x = e.touches[0].clientX;
+    player.style.left = x + 'px';
+  });
+
+  function createItem() {
+    if (score >= 10) return;
+
+    const item = document.createElement('div');
+    item.className = 'falling-item';
+    item.textContent = items[Math.floor(Math.random() * items.length)];
+    item.style.left = Math.random() * (window.innerWidth - 30) + 'px';
+    item.style.top = '-50px';
+    container.appendChild(item);
+
+    let speed = Math.random() * 3 + 2;
+    let top = -50;
+
+    function fall() {
+      top += speed;
+      item.style.top = top + 'px';
+
+      // Collision Detection
+      const pRect = player.getBoundingClientRect();
+      const iRect = item.getBoundingClientRect();
+
+      if (
+        iRect.bottom >= pRect.top &&
+        iRect.right >= pRect.left &&
+        iRect.left <= pRect.right &&
+        iRect.top <= pRect.bottom
+      ) {
+        score++;
+        scoreVal.innerText = score;
+        item.remove();
+        checkWin();
+        return;
+      }
+
+      if (top > window.innerHeight) {
+        item.remove();
+      } else {
+        requestAnimationFrame(fall);
+      }
+    }
+    requestAnimationFrame(fall);
+  }
+
+  function checkWin() {
+    if (score >= 10) {
+      nextBtn.style.display = 'block';
+      player.textContent = '🤴'; // You become her prince
+      document.querySelector('.goal').innerText = "You caught all my love! 🎉";
+    }
+  }
+
+  // Spawn items
+  setInterval(createItem, 800);
+
+</script>
+  </body>
+</html>

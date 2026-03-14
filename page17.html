@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page 17 — A Garden for You | Shristi's 24th 🌸</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@400;700&family=Lato:wght@300;400&display=swap"
+      rel="stylesheet" />
+    <style>
+    :root{--rose:#e8698a;--deep:#c0395a;--gold:#f7c873;--dark:#12050a;}
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{background:var(--dark);min-height:100vh;font-family:'Lato',sans-serif;color:white;overflow-x:hidden;display:flex;flex-direction:column;align-items:center;}
+    
+    #stars{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;}
+    .star{position:absolute;border-radius:50%;background:white;animation:twinkle var(--d) ease-in-out infinite alternate;}
+    @keyframes twinkle{from{opacity:0.1}to{opacity:0.95}}
+
+    .page-header{position:relative;z-index:2;text-align:center;padding:3rem 2rem 1rem;}
+    .page-num{font-family:'Dancing Script',cursive;font-size:1.1rem;color:var(--gold);letter-spacing:2px;}
+    .page-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,7vw,4rem);background:linear-gradient(135deg,#f8c8d8,var(--rose),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+    /* Flower Garden Grid */
+    .garden-grid {
+      position: relative; z-index: 2;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem; width: 90%; max-width: 600px; margin: 2rem auto;
+    }
+
+    .flower-pot {
+      aspect-ratio: 1/1; background: rgba(255,255,255,0.05);
+      border-radius: 20px; border: 1px solid rgba(232,105,138,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem; cursor: pointer; transition: 0.4s;
+      position: relative; overflow: hidden;
+    }
+
+    .flower-pot:hover {
+      transform: translateY(-10px) scale(1.05);
+      background: rgba(232,105,138,0.1);
+      border-color: var(--rose);
+      box-shadow: 0 10px 30px rgba(232,105,138,0.3);
+    }
+
+    /* Secret Message Overlay */
+    #message-display {
+      position: relative; z-index: 2;
+      width: 90%; max-width: 500px; min-height: 120px;
+      margin: 1rem auto; padding: 2rem;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px); border-radius: 20px;
+      text-align: center; border: 1px dashed var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Dancing Script', cursive; font-size: 1.5rem;
+      color: var(--gold); transition: 0.5s; opacity: 0;
+    }
+
+    .show-msg { opacity: 1 !important; transform: scale(1.05); }
+
+    .nav-row{position:relative;z-index:2;display:flex;gap:1rem;padding:3rem 1rem 5rem;}
+    .nav-btn{padding:0.8rem 2rem;border-radius:50px;font-family:'Dancing Script',cursive;font-size:1.2rem;text-decoration:none;transition:0.2s;border:none;cursor:pointer;}
+    .nav-btn.home{background:rgba(255,255,255,0.08);color:white;border:1px solid rgba(255,255,255,0.2);}
+    .nav-btn.next{background:linear-gradient(135deg,var(--rose),var(--deep));color:white;}
+  </style>
+  </head>
+  <body>
+
+    <div id="stars"></div>
+
+    <header class="page-header">
+      <p class="page-num">✨ Surprise #17 of 24 ✨</p>
+      <h1 class="page-title">A Garden for Shristi 🌸</h1>
+      <p style="margin-top: 15px; color: var(--rose); font-style: italic;">Tap
+        each flower to reveal a secret...</p>
+    </header>
+
+    <div class="garden-grid">
+      <div class="flower-pot"
+        onclick="showReason('🌹', 'Your kindness is the most beautiful thing about you.')">🌹</div>
+      <div class="flower-pot"
+        onclick="showReason('🌷', 'I love how you make even the smallest moments feel special.')">🌷</div>
+      <div class="flower-pot"
+        onclick="showReason('🌻', 'You are my sunshine on the darkest of days.')">🌻</div>
+      <div class="flower-pot"
+        onclick="showReason('🌺', 'Your laugh is my favorite soundtrack.')">🌺</div>
+      <div class="flower-pot"
+        onclick="showReason('🌸', 'You are more beautiful than any flower in this garden.')">🌸</div>
+      <div class="flower-pot"
+        onclick="showReason('💐', 'Thank you for choosing me every single day.')">💐</div>
+    </div>
+
+    <div id="message-display">Tap a flower...</div>
+
+    <div class="nav-row">
+      <a href="index.html" class="nav-btn home">🏠 Home</a>
+      <a href="page18.html" class="nav-btn next">Next Surprise → 🌸</a>
+    </div>
+
+    <script>
+  function showReason(emoji, text) {
+    const display = document.getElementById('message-display');
+    display.classList.remove('show-msg');
+    
+    setTimeout(() => {
+      display.innerHTML = emoji + "<br>" + text;
+      display.classList.add('show-msg');
+    }, 200);
+  }
+
+  (function(){
+    var se=document.getElementById('stars');
+    for(var i=0;i<120;i++){
+      var s=document.createElement('div'); s.className='star';
+      var sz=(Math.random()*2+0.5);
+      s.style.cssText='width:'+sz+'px;height:'+sz+'px;top:'+(Math.random()*100)+'%;left:'+(Math.random()*100)+'%;--d:'+(Math.random()*3+1.5).toFixed(1)+'s;animation-delay:'+(Math.random()*5).toFixed(1)+'s;';
+      se.appendChild(s);
+    }
+    
+    var audio = new Audio('Die_with_a_smile.mp3');
+    audio.loop = true;
+    document.addEventListener('click', () => { audio.play().catch(()=>{}); }, {once: true});
+  })();
+</script>
+
+  </body>
+</html>

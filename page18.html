@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page 18 — Our Silly Side | Shristi's 24th 🌸</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@400;700&family=Lato:wght@300;400&display=swap"
+      rel="stylesheet" />
+    <style>
+    :root{--rose:#e8698a;--deep:#c0395a;--gold:#f7c873;--dark:#1a0a10;}
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{background:var(--dark);min-height:100vh;font-family:'Lato',sans-serif;color:white;overflow-x:hidden;display:flex;flex-direction:column;align-items:center;}
+    
+    #stars{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;}
+    .star{position:absolute;border-radius:50%;background:white;animation:twinkle var(--d) ease-in-out infinite alternate;}
+    @keyframes twinkle{from{opacity:0.1}to{opacity:0.95}}
+
+    .page-header{position:relative;z-index:2;text-align:center;padding:3rem 2rem 1rem;}
+    .page-num{font-family:'Dancing Script',cursive;font-size:1.1rem;color:var(--gold);letter-spacing:2px;}
+    .page-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,7vw,4rem);background:linear-gradient(135deg,#f8c8d8,var(--rose),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+    /* The Jar Styling */
+    .jar-container {
+      position: relative; z-index: 2; margin: 2rem auto;
+      width: 180px; height: 240px; cursor: pointer;
+    }
+    .jar {
+      width: 100%; height: 100%;
+      background: rgba(255, 255, 255, 0.1);
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-radius: 40px 40px 20px 20px;
+      position: relative; backdrop-filter: blur(5px);
+      box-shadow: 0 0 30px rgba(232, 105, 138, 0.2);
+    }
+    .jar-lid {
+      width: 110%; height: 30px; background: var(--gold);
+      position: absolute; top: -10px; left: -5%; border-radius: 10px;
+    }
+    .jar-label {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      background: #fff; color: var(--dark); padding: 5px 15px;
+      font-family: 'Dancing Script', cursive; font-weight: bold; border-radius: 5px;
+      white-space: nowrap; font-size: 1.2rem;
+    }
+    
+    /* Shake Animation */
+    .shake { animation: shakeJar 0.4s ease-in-out; }
+    @keyframes shakeJar {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(5deg); }
+      75% { transform: rotate(-5deg); }
+    }
+
+    /* Floating Joke Text */
+    .joke-popup {
+      position: absolute; top: -20px; left: 50%; transform: translateX(-50%);
+      background: var(--rose); color: white; padding: 10px 20px;
+      border-radius: 15px; font-family: 'Playfair Display', serif;
+      font-style: italic; font-size: 1rem; text-align: center;
+      width: 250px; pointer-events: none; opacity: 0; z-index: 5;
+    }
+    .pop-anim { animation: flyUp 5s forwards; }
+    @keyframes flyUp {
+      0% { opacity: 0; transform: translate(-50%, 0) scale(0.5); }
+      20% { opacity: 1; transform: translate(-50%, -80px) scale(1); }
+      80% { opacity: 1; transform: translate(-50%, -100px) scale(1); }
+      100% { opacity: 0; transform: translate(-50%, -140px) scale(0.8); }
+    }
+
+    .prose {
+      z-index: 2; max-width: 600px; width: 90%; text-align: center;
+      font-family: 'Playfair Display', serif; font-style: italic; line-height: 1.8;
+      color: rgba(255,255,255,0.9); margin-top: 1rem;
+    }
+
+    .nav-row{position:relative;z-index:2;display:flex;gap:1rem;justify-content:center;padding:3rem 1rem 5rem;}
+    .nav-btn{padding:0.8rem 2rem;border-radius:50px;font-family:'Dancing Script',cursive;font-size:1.2rem;text-decoration:none;transition:0.2s;border:none;cursor:pointer;}
+    .nav-btn.home{background:rgba(255,255,255,0.08);color:white;border:1px solid rgba(255,255,255,0.2);}
+    .nav-btn.next{background:linear-gradient(135deg,var(--rose),var(--deep));color:white;}
+  </style>
+  </head>
+  <body>
+
+    <div id="stars"></div>
+
+    <header class="page-header">
+      <p class="page-num">✨ Surprise #18 of 24 ✨</p>
+      <h1 class="page-title">The Jar of Nonsense 😜</h1>
+      <p style="color: var(--gold); margin-top: 10px;">Tap the jar to release a
+        silly memory!</p>
+    </header>
+
+    <div class="jar-container" onclick="shakeJar()">
+      <div id="jokeBox" class="joke-popup"></div>
+      <div class="jar" id="mainJar">
+        <div class="jar-lid"></div>
+        <div class="jar-label">Us & Silly Things</div>
+      </div>
+    </div>
+
+    <div class="prose">
+      <p>You are my best friend, Kaali. And best friends are allowed to be
+        totally stupid together. I treasure every single goofy, silly, chaotic
+        moment we have shared. Do not ever stop being this way with me. 😂💗</p>
+    </div>
+
+    <div class="nav-row">
+      <a href="index.html" class="nav-btn home">🏠 Home</a>
+      <a href="page19.html" class="nav-btn next">Next Surprise → 🌸</a>
+    </div>
+
+    <script>
+  const jokes = [
+    "That one face you make when you're judging someone... 😂",
+    "How we can talk for hours about absolutely nothing.",
+    "Our weird obsession with us!",
+    "The way you look at me when I do something stupid.",
+    "Your 'angry' face that is actually just cute. 😤❤️",
+    "Our 2 AM conversations that gives us comfort."
+  ];
+
+  function shakeJar() {
+    const jar = document.getElementById('mainJar');
+    const box = document.getElementById('jokeBox');
+    
+    // Reset animations
+    jar.classList.remove('shake');
+    box.classList.remove('pop-anim');
+    void jar.offsetWidth; // trigger reflow
+    
+    // Add animations
+    jar.classList.add('shake');
+    box.innerText = jokes[Math.floor(Math.random() * jokes.length)];
+    box.classList.add('pop-anim');
+  }
+
+  // Star Effect
+  (function(){
+    var se=document.getElementById('stars');
+    for(var i=0; i<120; i++){
+      var s=document.createElement('div'); s.className='star';
+      var sz=(Math.random()*2+0.5);
+      s.style.cssText='width:'+sz+'px;height:'+sz+'px;top:'+(Math.random()*100)+'%;left:'+(Math.random()*100)+'%;--d:'+(Math.random()*3+1.5).toFixed(1)+'s;animation-delay:'+(Math.random()*5).toFixed(1)+'s;';
+      se.appendChild(s);
+    }
+    var audio = new Audio('Die_with_a_smile.mp3');
+    audio.loop = true;
+    document.addEventListener('click', () => { audio.play().catch(()=>{}); }, {once: true});
+  })();
+</script>
+
+  </body>
+</html>

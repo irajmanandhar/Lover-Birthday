@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page 22 — Mood Matcher | Shristi's 24th 🌸</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Dancing+Script:wght@700&family=Lato:wght@400&display=swap"
+      rel="stylesheet" />
+    <style>
+    :root{--rose:#e8698a;--gold:#f7c873;--dark:#12050a;--bg:var(--dark);}
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{background:var(--bg); min-height:100vh; font-family:'Lato',sans-serif; color:white; transition: background 1s ease; overflow-x:hidden; display:flex; flex-direction:column; align-items:center;}
+    
+    .page-header{text-align:center; padding:3rem 1rem; z-index:10;}
+    .page-title{font-family:'Playfair Display',serif; font-size:2.5rem; color:var(--gold); margin-bottom:10px;}
+    
+    .mood-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+      width: 90%; max-width: 500px; z-index: 10; margin-bottom: 2rem;
+    }
+
+    .mood-btn {
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px; padding: 20px; font-size: 2.5rem; cursor: pointer;
+      transition: 0.3s; display: flex; flex-direction: column; align-items: center; gap: 10px;
+    }
+    .mood-btn span { font-size: 0.9rem; font-family: 'Lato'; color: #ccc; text-transform: uppercase; letter-spacing: 1px; }
+    .mood-btn:hover { transform: scale(1.1); background: rgba(255,255,255,0.15); border-color: var(--gold); }
+
+    #reaction-box {
+      width: 90%; max-width: 500px; min-height: 150px;
+      background: rgba(255,255,255,0.05); backdrop-filter: blur(10px);
+      border-radius: 25px; padding: 2rem; text-align: center;
+      border: 1px dashed var(--rose); margin-bottom: 3rem;
+      display: flex; flex-direction: column; justify-content: center;
+      opacity: 0; transform: translateY(20px); transition: 0.5s;
+    }
+    #reaction-box.active { opacity: 1; transform: translateY(0); }
+
+    .prescription-title { font-family: 'Dancing Script', cursive; font-size: 1.8rem; color: var(--gold); margin-bottom: 10px; }
+    .prescription-text { font-style: italic; font-size: 1.1rem; line-height: 1.6; }
+
+    .nav-row{display:flex; gap:1rem; padding-bottom: 5rem; z-index: 10;}
+    .nav-btn{padding:0.8rem 2rem; border-radius:50px; font-family:'Dancing Script',cursive; font-size:1.2rem; text-decoration:none; color: white; background:rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);}
+    .nav-btn.next{background: linear-gradient(135deg, var(--rose), #c0395a); border: none;}
+
+    /* Special Effects Classes */
+    .mood-happy { --bg: #2d1b33; }
+    .mood-sleepy { --bg: #050a1a; }
+    .mood-hungry { --bg: #2a1a05; }
+    .mood-annoyed { --bg: #1a0505; }
+  </style>
+  </head>
+  <body>
+
+    <header class="page-header">
+      <p style="font-family:'Dancing Script'; color:var(--rose);">Surprise
+        #22</p>
+      <h1 class="page-title">The Shristi-O-Meter 🌡️</h1>
+      <p>How are you feeling right this second?</p>
+    </header>
+
+    <div class="mood-grid">
+      <div class="mood-btn"
+        onclick="updateMood('happy')">😊<span>Happy</span></div>
+      <div class="mood-btn"
+        onclick="updateMood('sleepy')">🥱<span>Sleepy</span></div>
+      <div class="mood-btn"
+        onclick="updateMood('hungry')">🍕<span>Hungry</span></div>
+      <div class="mood-btn"
+        onclick="updateMood('annoyed')">😤<span>Annoyed</span></div>
+      <div class="mood-btn"
+        onclick="updateMood('clingy')">🥺<span>Clingy</span></div>
+      <div class="mood-btn"
+        onclick="updateMood('bored')">💃<span>Wild</span></div>
+    </div>
+
+    <div id="reaction-box">
+      <div class="prescription-title" id="p-title"></div>
+      <div class="prescription-text" id="p-text"></div>
+    </div>
+
+    <div class="nav-row">
+      <a href="index.html" class="nav-btn">🏠 Home</a>
+      <a href="page23.html" class="nav-btn next">Page 23 → 🌸</a>
+    </div>
+
+    <script>
+  const moods = {
+    happy: {
+      title: "Keep Shining!",
+      text: "Your happiness is literally my favorite thing in the world. Stay this way forever, Kaali! ✨",
+      class: "mood-happy"
+    },
+    sleepy: {
+      title: "Time for Zzzs",
+      text: "Go to sleep, panda! I'll be right here in your dreams (and on your phone) when you wake up. 💤",
+      class: "mood-sleepy"
+    },
+    hungry: {
+      title: "The Food Alarm!",
+      text: "If I were there, I'd bring you momos and chocolate right now. Go grab a snack before you get hangry! 🥟",
+      class: "mood-hungry"
+    },
+    annoyed: {
+      title: "Punch a Pillow!",
+      text: "Who dared to annoy my queen? Tell me their name, I'll send them a very strongly worded email. 😤🔥",
+      class: "mood-annoyed"
+    },
+    clingy: {
+      title: "Virtual Hug: Loading...",
+      text: "Sending you 1,000,000 virtual hugs. I'm always yours, no matter how many miles are between us. 🫂💗",
+      class: "mood-happy"
+    },
+    bored: {
+      title: "Party Mode!",
+      text: "Let's do something crazy! Put on your favorite song and dance like nobody's watching. 💃🎶",
+      class: "mood-happy"
+    }
+  };
+
+  function updateMood(key) {
+    const data = moods[key];
+    const box = document.getElementById('reaction-box');
+    
+    // Change background color
+    document.body.className = data.class;
+    
+    // Update text
+    document.getElementById('p-title').innerText = data.title;
+    document.getElementById('p-text').innerText = data.text;
+    
+    // Animate box
+    box.classList.remove('active');
+    void box.offsetWidth;
+    box.classList.add('active');
+  }
+</script>
+
+  </body>
+</html>

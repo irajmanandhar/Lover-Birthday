@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page 12 — The Secret Search | Shristi's 24th 🌸</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@400;700&family=Lato:wght@300;400&display=swap"
+      rel="stylesheet" />
+    <style>
+    :root{--rose:#e8698a;--deep:#c0395a;--gold:#f7c873;--dark:#1a0a10;}
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{background:var(--dark);min-height:100vh;font-family:'Lato',sans-serif;color:white;overflow-x:hidden;display:flex;flex-direction:column;align-items:center;}
+    
+    #stars{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden;}
+    .star{position:absolute;border-radius:50%;background:white;animation:twinkle var(--d) ease-in-out infinite alternate;}
+    @keyframes twinkle{from{opacity:0.1}to{opacity:0.95}}
+    #petals{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;overflow:hidden;}
+    .petal{position:absolute;top:-40px;animation:fall linear infinite;pointer-events:none;}
+    @keyframes fall{0%{transform:translateY(-50px) rotate(0deg);opacity:1}100%{transform:translateY(110vh) rotate(720deg);opacity:0}}
+
+    .page-header{position:relative;z-index:2;text-align:center;padding:3rem 2rem 1rem;animation:fadeUp 0.8s ease forwards;}
+    .page-num{font-family:'Dancing Script',cursive;font-size:1.1rem;color:var(--gold);letter-spacing:2px;}
+    .page-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,7vw,4rem);background:linear-gradient(135deg,#f8c8d8,var(--rose),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-top:0.3rem;}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:translateY(0)}}
+    
+    .card{position:relative;z-index:2;max-width:720px;width:95%;margin:1.5rem auto;background:rgba(255,255,255,0.04);border:1px solid rgba(232,105,138,0.3);border-radius:20px;padding:2rem;backdrop-filter:blur(8px);box-shadow:0 20px 60px rgba(232,105,138,0.12);animation:fadeUp 0.9s ease forwards;animation-delay:0.3s;opacity:0; text-align: center;}
+    .gold-text{font-family:'Dancing Script',cursive;color:var(--gold);font-size:1.2rem; margin-bottom: 0.5rem;}
+
+    #puzzle{display: inline-block; background: rgba(0,0,0,0.4); padding: 20px; border-radius: 15px; border: 1px solid rgba(232,105,138,0.2); user-select: none; line-height: 0;}
+    .cell{display:inline-block; width:2.8rem; height:2.8rem; line-height:2.8rem; text-align:center; cursor:pointer; border-radius:8px; transition:0.2s; color:rgba(255,255,255,0.5); font-family: monospace; font-size: 1.6rem; margin: 3px;}
+    @media(max-width: 400px) { .cell { width: 1.5rem; height: 1.5rem; line-height: 1.5rem; font-size: 0.85rem; } }
+    .cell:hover{background:rgba(232,105,138,0.3); color: white;}
+    .cell.selected{background:var(--rose); color: white; box-shadow: 0 0 10px var(--rose);}
+    .cell.found{background:rgba(247,200,115,0.4); color:var(--gold); font-weight: bold; text-shadow: 0 0 5px var(--gold);}
+    
+    .nav-row{position:relative;z-index:2;display:flex;gap:1rem;justify-content:center;padding:2rem 1rem 5rem;flex-wrap:wrap;}
+    .nav-btn{padding:0.8rem 2rem;border-radius:50px;font-family:'Dancing Script',cursive;font-size:1.2rem;text-decoration:none;transition:0.2s;border:none;cursor:pointer;}
+    .nav-btn.home{background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.2);}
+    .nav-btn.next{background:linear-gradient(135deg,var(--rose),var(--deep));color:white;box-shadow:0 5px 20px rgba(232,105,138,0.4);}
+    .nav-btn:hover{transform:translateY(-3px);}
+    </style>
+  </head>
+  <body>
+    <div id="stars"></div>
+    <div id="petals"></div>
+    <audio id="bgm" loop><source src="Die_with_a_smile.mp3"
+        type="audio/mpeg"></audio>
+
+    <header class="page-header">
+      <p class="page-num">✨ Surprise #12 of 24 ✨</p>
+      <h1 class="page-title">The Secret Search 🧩</h1>
+    </header>
+
+    <div class="card">
+      <p class="gold-text">There's a hidden question in this grid. Can you find
+        all 8 words? 😉</p>
+      <p
+        style="color:rgba(255,255,255,0.4);font-size:0.8rem;margin-bottom:1.2rem;">Select
+        start and end letters. It's geting harder now!</p>
+
+      <div id="puzzle"></div>
+
+      <div id="winMsg"
+        style="display:none; margin-top:1.5rem; animation: fadeUp 0.5s ease;">
+        <p
+          style="font-family:'Dancing Script',cursive;font-size:1.8rem;color:var(--gold);">
+          🎉 "Iraj Loves His Kaali... Will You Marry Him?" 💗
+        </p>
+        <p
+          style="color: rgba(255,255,255,0.8); font-style: italic; margin-top: 0.5rem;">
+          You found the biggest secret of them all.
+        </p>
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <a href="index.html" class="nav-btn home">🏠 Home</a>
+      <a href="page13.html" class="nav-btn next">Next Surprise → 🌸</a>
+    </div>
+
+    <script>
+    const WORDS = ["IRAJ", "LOVES", "HIS", "KAALI", "WILL", "YOU", "MARRY", "HIM"];
+    const size = 12;
+    let grid = Array(size).fill().map(() => Array(size).fill(''));
+    let found = [], sel = null;
+
+    function placeWords() {
+      WORDS.forEach(word => {
+        let placed = false;
+        let attempts = 0;
+        while (!placed && attempts < 100) {
+          let dir = Math.random() > 0.5 ? 'H' : 'V';
+          let r = Math.floor(Math.random() * size);
+          let c = Math.floor(Math.random() * size);
+          
+          if (dir === 'H' && c + word.length <= size) {
+            let space = true;
+            for(let i=0; i<word.length; i++) if(grid[r][c+i] !== '') space = false;
+            if(space) {
+              for(let i=0; i<word.length; i++) grid[r][c+i] = word[i];
+              placed = true;
+            }
+          } else if (dir === 'V' && r + word.length <= size) {
+            let space = true;
+            for(let i=0; i<word.length; i++) if(grid[r+i][c] !== '') space = false;
+            if(space) {
+              for(let i=0; i<word.length; i++) grid[r+i][c] = word[i];
+              placed = true;
+            }
+          }
+          attempts++;
+        }
+      });
+      // Decoys from the target words to make it confusing
+      const decoys = "IRAJLOVESHISKAALIWILLYOUMARRYHIM";
+      for(let r=0; r<size; r++) {
+        for(let c=0; c<size; c++) {
+          if(grid[r][c] === '') grid[r][c] = decoys[Math.floor(Math.random()*decoys.length)];
+        }
+      }
+    }
+
+    function initGame() {
+      placeWords();
+      const container = document.getElementById('puzzle');
+      grid.forEach((row, r) => {
+        row.forEach((char, c) => {
+          const span = document.createElement('span');
+          span.className = 'cell';
+          span.textContent = char;
+          span.dataset.r = r; span.dataset.c = c;
+          span.onclick = () => {
+            if(!sel) {
+              sel = span; span.classList.add('selected');
+            } else {
+              checkMatch(sel, span);
+              sel.classList.remove('selected'); sel = null;
+            }
+          };
+          container.appendChild(span);
+        });
+        container.appendChild(document.createElement('br'));
+      });
+    }
+
+    function checkMatch(s, e) {
+      let r1 = +s.dataset.r, c1 = +s.dataset.c;
+      let r2 = +e.dataset.r, c2 = +e.dataset.c;
+      let word = "", cells = [];
+
+      if (r1 === r2) {
+        let min = Math.min(c1, c2), max = Math.max(c1, c2);
+        for(let i=min; i<=max; i++){
+          let cell = document.querySelector(`[data-r="${r1}"][data-c="${i}"]`);
+          word += cell.textContent; cells.push(cell);
+        }
+      } else if (c1 === c2) {
+        let min = Math.min(r1, r2), max = Math.max(r1, r2);
+        for(let i=min; i<=max; i++){
+          let cell = document.querySelector(`[data-r="${i}"][data-c="${c1}"]`);
+          word += cell.textContent; cells.push(cell);
+        }
+      }
+
+      let rev = word.split('').reverse().join('');
+      let match = WORDS.includes(word) ? word : (WORDS.includes(rev) ? rev : null);
+
+      if(match && !found.includes(match)) {
+        found.push(match);
+        cells.forEach(c => c.classList.add('found'));
+        if(found.length === WORDS.length) document.getElementById('winMsg').style.display = 'block';
+      }
+    }
+
+    initGame();
+
+    (function(){
+      var se=document.getElementById('stars');
+      for(var i=0;i<100;i++){
+        var s=document.createElement('div'); s.className='star';
+        var sz=(Math.random()*2+1);
+        s.style.cssText='width:'+sz+'px;height:'+sz+'px;top:'+(Math.random()*100)+'%;left:'+(Math.random()*100)+'%;--d:'+(Math.random()*3+1)+'s;';
+        se.appendChild(s);
+      }
+      var pe=document.getElementById('petals');
+      var em=['🌸','💗','✨'];
+      for(var j=0;j<15;j++){
+        var p=document.createElement('div'); p.className='petal';
+        p.textContent=em[Math.floor(Math.random()*3)];
+        p.style.cssText='left:'+(Math.random()*100)+'%;animation-duration:'+(Math.random()*5+5)+'s;animation-delay:'+(Math.random()*5)+'s;';
+        pe.appendChild(p);
+      }
+      var audio=document.getElementById('bgm'), playing=false;
+      document.addEventListener('click',function(){ if(!playing){ audio.play(); playing=true; } },{once:true});
+    })();
+    </script>
+  </body>
+</html>

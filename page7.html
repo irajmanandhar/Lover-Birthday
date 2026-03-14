@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page 7 — How Well Do You Know Iru? | Shristi's 24th 🌸</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@400;700&family=Lato:wght@300;400&display=swap"
+      rel="stylesheet" />
+    <style>
+    :root{--rose:#e8698a;--deep:#c0395a;--gold:#f7c873;--dark:#1a0a10;}
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{background:var(--dark);min-height:100vh;font-family:'Lato',sans-serif;color:white;overflow-x:hidden;display:flex;flex-direction:column;align-items:center;}
+    
+    /* --- Theme Effects CSS --- */
+    #stars{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden;}
+    .star{position:absolute;border-radius:50%;background:white;animation:twinkle var(--d) ease-in-out infinite alternate;}
+    @keyframes twinkle{from{opacity:0.1}to{opacity:0.95}}
+    
+    #petals{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;overflow:hidden;}
+    .petal{position:absolute;top:-40px;animation:fall linear infinite;pointer-events:none;}
+    @keyframes fall{
+        0%{transform:translateY(-50px) rotate(0deg);opacity:1}
+        100%{transform:translateY(110vh) rotate(720deg);opacity:0}
+    }
+    /* ------------------------- */
+
+    .page-header{position:relative;z-index:2;text-align:center;padding:3rem 2rem 1rem;animation:fadeUp 0.8s ease forwards;}
+    .page-num{font-family:'Dancing Script',cursive;font-size:1.1rem;color:var(--gold);letter-spacing:2px;}
+    .page-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,7vw,4rem);background:linear-gradient(135deg,#f8c8d8,var(--rose),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-top:0.3rem;}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:translateY(0)}}
+    
+    .card{position:relative;z-index:2;max-width:720px;width:90%;margin:1.5rem auto;background:rgba(255,255,255,0.04);border:1px solid rgba(232,105,138,0.3);border-radius:20px;padding:2.5rem;backdrop-filter:blur(8px);box-shadow:0 20px 60px rgba(232,105,138,0.12);animation:fadeUp 0.9s ease forwards;animation-delay:0.3s;opacity:0;}
+    .gold-text{font-family:'Dancing Script',cursive;color:var(--gold);font-size:1.15rem;}
+    .hearts{text-align:center;font-size:1.8rem;letter-spacing:6px;margin:1rem 0;}
+    
+    /* Quiz Specific Styles */
+    .qcard{animation:fadeUp 0.4s ease forwards;}
+    .opts{display:grid;grid-template-columns:1fr 1fr;gap:0.7rem;margin-top:1rem;}
+    .opt{padding:0.85rem 1rem;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);border-radius:12px;color:white;font-size:0.95rem;cursor:pointer;transition:all 0.2s;text-align:left;}
+    .opt:hover:not(:disabled){background:rgba(232,105,138,0.2);border-color:var(--rose);}
+    .opt.correct{background:rgba(76,175,80,0.25)!important;border-color:#4caf50!important;}
+    .opt.wrong{background:rgba(231,76,60,0.25)!important;border-color:#e74c3c!important;}
+    .nextbtn{display:block;margin:1.2rem auto 0;padding:0.75rem 2rem;background:linear-gradient(135deg,var(--rose),var(--deep));border:none;border-radius:50px;color:white;font-family:'Dancing Script',cursive;font-size:1.2rem;cursor:pointer;}
+    .qtext{font-family:'Playfair Display',serif;font-style:italic;font-size:1.1rem;line-height:1.6;color:rgba(255,255,255,0.9);}
+
+    .nav-row{position:relative;z-index:2;display:flex;gap:1rem;justify-content:center;padding:2rem 1rem 5rem;flex-wrap:wrap;}
+    .nav-btn{padding:0.8rem 2rem;border-radius:50px;font-family:'Dancing Script',cursive;font-size:1.2rem;text-decoration:none;transition:transform 0.2s,box-shadow 0.2s;border:none;cursor:pointer;}
+    .nav-btn.home{background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.2);}
+    .nav-btn.next{background:linear-gradient(135deg,var(--rose),var(--deep));color:white;box-shadow:0 5px 20px rgba(232,105,138,0.4);}
+    .nav-btn:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(232,105,138,0.5);}
+  </style>
+  </head>
+  <body>
+    <div id="stars"></div>
+    <div id="petals"></div>
+    <audio id="bgm" loop><source src="Die_with_a_smile.mp3"
+        type="audio/mpeg"></audio>
+
+    <header class="page-header">
+      <p class="page-num">✨ Surprise #7 of 24 ✨</p>
+      <h1 class="page-title">How Well Do You Know Iru? 🎮</h1>
+    </header>
+
+    <div class="card" style="padding:2rem;">
+      <p class="gold-text">Answer all 7 questions — no cheating, Kaali!
+        😄</p><br>
+      <div id="scoreBar"
+        style="font-family:'Dancing Script',cursive;color:var(--gold);margin-bottom:0.8rem;font-size:1.2rem;">Question
+        1 of 7 · Score: 0</div>
+      <div
+        style="width:100%;background:rgba(255,255,255,0.1);border-radius:50px;height:6px;margin-bottom:1.5rem;">
+        <div id="prog"
+          style="height:6px;background:linear-gradient(90deg,var(--rose),var(--gold));border-radius:50px;width:0%;transition:width 0.4s;"></div>
+      </div>
+      <div id="qArea"></div>
+      <div id="resultDiv"
+        style="display:none;text-align:center;padding:1.5rem 0;">
+        <div
+          style="font-family:'Playfair Display',serif;font-size:4rem;color:var(--gold);"
+          id="rScore"></div>
+        <p
+          style="font-family:'Dancing Script',cursive;font-size:1.6rem;color:var(--rose);margin-top:0.5rem;"
+          id="rMsg"></p>
+        <div class="hearts">💗 💖 💗</div>
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <a href="index.html" class="nav-btn home">🏠 Home</a>
+      <a href="page8.html" class="nav-btn next">Next Surprise → 🌸</a>
+    </div>
+
+    <script>
+    // Quiz Logic
+    var qs=[
+      {q:"What is Iru's full name?",opts:["Iraj Manandhar","Iraj Shrestha","Iru Kumar","Iraj Thapa"],c:0,f:"Yes! That's your Iru! 💖"},
+      {q:"What does Iru call you?",opts:["Babe","Love","Kaali","Sunny"],c:2,f:"Kaali — the name only I get to use 🖤"},
+      {q:"What makes Iru happiest in the world?",opts:["Being with Kaali!","Movies","Sleeping","All of the Above"],c:3,f:"I knew, you know me.💗"},
+      {q:"What does Iru love most about Shristi?",opts:["Her smile","Her kindness","Her laugh","Everything about her"],c:3,f:"EVERYTHING. There is no choosing just one! 🌸"},
+      {q:"How does Iru feel about Shristi today?",opts:["Happy","Grateful","Overwhelmed with love","All of the above 💖"],c:3,f:"All of the above, times infinity! ✨"},
+      {q:"True or false: Iru loves Shristi infinitely more today than yesterday?",opts:["False","True","Infinitely more","B & C — True AND infinitely more!"],c:3,f:"Every single day the love just grows 💞"},
+      {q:"Will you marry me?",opts:["Yes","Definetly","Okay","Of course"],c:"all",f:"I knew. I love you💖"},
+    ];
+    var cur=0,score=0;
+    function render(){
+      var q=qs[cur];
+      document.getElementById('prog').style.width=(cur/qs.length*100)+'%';
+      document.getElementById('scoreBar').textContent='Question '+(cur+1)+' of '+qs.length+' · Score: '+score;
+      document.getElementById('qArea').innerHTML='<div class="qcard"><p class="qtext">'+q.q+'</p><div class="opts">'+q.opts.map(function(o,i){return'<button class="opt" onclick="choose(this,'+i+')">'+o+'</button>';}).join('')+'</div><p id="fb" style="font-family:Dancing Script,cursive;font-size:1.1rem;color:var(--gold);margin-top:0.8rem;min-height:1.4rem;"></p></div>';
+    }
+    function choose(btn, idx) {
+      var q = qs[cur];
+      document.querySelectorAll('.opt').forEach(function(b) { b.disabled = true; });
+      if (idx === q.c || q.c === "all") {
+        btn.classList.add('correct');
+        score++;
+      } else {
+        btn.classList.add('wrong');
+        document.querySelectorAll('.opt')[q.c].classList.add('correct');
+      }
+      document.getElementById('fb').textContent = q.f;
+      var nb = document.createElement('button');
+      nb.className = 'nextbtn';
+      nb.textContent = cur < qs.length - 1 ? 'Next Question →' : 'See My Result 🎉';
+      nb.onclick = next;
+      document.querySelector('.qcard').appendChild(nb);
+    }
+    function next(){cur++;if(cur>=qs.length){showResult();}else{render();}}
+    function showResult(){
+      document.getElementById('qArea').style.display='none';
+      document.getElementById('prog').style.width='100%';
+      document.getElementById('resultDiv').style.display='block';
+      document.getElementById('rScore').textContent=score+' / '+qs.length;
+      var msgs=['Keep studying! 😄','Getting there! 💕','Pretty good! 🌸','You know him well! 💖','Amazing! ✨','Perfect! 🌺','You know Iru by heart! 💗'];
+      document.getElementById('rMsg').textContent=msgs[Math.min(score,msgs.length-1)];
+    }
+    render();
+
+    // Theme Effects Script
+    (function(){
+      var se=document.getElementById('stars');
+      for(var i=0;i<140;i++){
+        var s=document.createElement('div');
+        s.className='star';
+        var sz=(Math.random()*2.5+0.5);
+        s.style.cssText='width:'+sz+'px;height:'+sz+'px;top:'+(Math.random()*100)+'%;left:'+(Math.random()*100)+'%;--d:'+(Math.random()*3+1.5).toFixed(1)+'s;animation-delay:'+(Math.random()*5).toFixed(1)+'s;';
+        se.appendChild(s);
+      }
+      var pe=document.getElementById('petals');
+      var emojis=['🌸','🌺','🌹','💮','🌷','✨','💗'];
+      for(var j=0;j<18;j++){
+        var p=document.createElement('div');
+        p.className='petal';
+        p.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+        p.style.cssText='left:'+(Math.random()*100)+'%;animation-duration:'+(Math.random()*8+6).toFixed(1)+'s;animation-delay:'+(Math.random()*12).toFixed(1)+'s;font-size:'+(Math.random()*1+0.8).toFixed(1)+'rem;';
+        pe.appendChild(p);
+      }
+      var audio=document.getElementById('bgm'), playing=false;
+      document.addEventListener('click',function(){
+        if(!playing){
+          audio.play().then(function(){ playing=true; }).catch(function(){});
+        }
+      },{once:true});
+    })();
+    </script>
+  </body>
+</html>
