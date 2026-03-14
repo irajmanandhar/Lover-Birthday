@@ -50,10 +50,41 @@
         .nav-btn.home { background:rgba(255,255,255,0.08); color:rgba(255,255,255,0.7); border:1px solid rgba(255,255,255,0.2); }
         .nav-btn.next { background:linear-gradient(135deg,var(--rose),#c0395a); color:white; box-shadow:0 5px 20px rgba(232,105,138,0.4); }
         .nav-btn:hover { transform:translateY(-3px); box-shadow:0 10px 30px rgba(232,105,138,0.5); }
+    
+    /* ── Romantic page-entry animation ── */
+    @keyframes pageReveal {
+      0%   { opacity:0; transform:translateY(30px) scale(0.97); filter:blur(8px); }
+      60%  { filter:blur(0); }
+      100% { opacity:1; transform:translateY(0) scale(1); filter:blur(0); }
+    }
+    body > *:not(#stars):not(#petals):not(#petals-container):not(#shooting-stars):not(script):not(style) {
+      animation: pageReveal 0.9s cubic-bezier(0.165,0.84,0.44,1) forwards;
+    }
+
+    /* ── Shooting stars on every page ── */
+    #shooting-stars { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:1; overflow:hidden; }
+    .shoot {
+      position:absolute; width:2px; height:2px; border-radius:50%;
+      background:white; box-shadow:0 0 5px 1px white; opacity:0;
+      animation:shoot var(--sd) linear var(--delay) infinite;
+    }
+    .shoot::after {
+      content:''; position:absolute; top:50%; left:0; transform:translateY(-50%);
+      width:70px; height:1px;
+      background:linear-gradient(to left,rgba(255,255,255,0.85),transparent);
+    }
+    @keyframes shoot {
+      0%   { opacity:0; transform:translate(0,0) rotate(var(--ang)); }
+      6%   { opacity:1; }
+      85%  { opacity:0.7; }
+      100% { opacity:0; transform:translate(calc(var(--dx)*1px),calc(var(--dy)*1px)) rotate(var(--ang)); }
+    }
+
     </style>
     </head>
     <body>
         <div id="stars"></div>
+    <div id="shooting-stars"></div>
         <div id="petals"></div>
 
         <header class="page-header">
@@ -114,6 +145,20 @@
             p.style.fontSize = (Math.random() * 1 + 0.8) + 'rem';
             pe.appendChild(p);
         }
-    </script>
+    
+  // Shooting stars
+  (function(){
+    var ss = document.getElementById('shooting-stars');
+    if(!ss){ ss=document.createElement('div'); ss.id='shooting-stars'; document.body.insertBefore(ss,document.body.firstChild); }
+    for(var i=0;i<6;i++){
+      var sh=document.createElement('div'); sh.className='shoot';
+      var ang=28+Math.random()*18, dist=280+Math.random()*300;
+      var rad=ang*Math.PI/180;
+      sh.style.cssText='top:'+(Math.random()*55)+'%;left:'+(Math.random()*100)+'%;--sd:'+(Math.random()*6+4).toFixed(1)+'s;--delay:'+(Math.random()*16).toFixed(1)+'s;--dx:'+(Math.cos(rad)*dist).toFixed(0)+';--dy:'+(Math.sin(rad)*dist).toFixed(0)+';--ang:'+ang+'deg;';
+      ss.appendChild(sh);
+    }
+  })();
+
+</script>
     </body>
 </html>

@@ -8,96 +8,209 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 html,body{width:100%;height:100%;overflow:hidden;background:#1a0a10;}
 iframe{width:100%;height:100%;border:none;display:block;}
+
+/* ── MUSIC BUTTON ── */
 #mbtn{
-  position:fixed;
-  bottom:18px;
-  right:18px;
-  z-index:9999;
-  width:44px;
-  height:44px;
-  border-radius:50%;
-  background:linear-gradient(135deg,#e8698a,#c0395a);
-  border:none;
-  color:white;
-  font-size:1.1rem;
-  cursor:pointer;
+  position:fixed; bottom:18px; right:18px; z-index:9999;
+  width:46px; height:46px; border-radius:50%;
+  background:linear-gradient(135deg,#e8698a,#c0395a); border:none; color:white;
+  font-size:1.1rem; cursor:pointer;
   box-shadow:0 4px 20px rgba(232,105,138,0.6);
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  display:flex; align-items:center; justify-content:center;
   transition:transform 0.2s,box-shadow 0.2s;
 }
-#mbtn:hover{transform:scale(1.12);box-shadow:0 6px 28px rgba(232,105,138,0.9);}
-</style>
+#mbtn:hover{transform:scale(1.13);box-shadow:0 6px 30px rgba(232,105,138,0.9);}
+
+/* ── TRANSITION OVERLAY (lives in index, covers the iframe) ── */
+#trans{
+  position:fixed; top:0; left:0; width:100%; height:100%;
+  z-index:9990; pointer-events:none;
+  display:flex; align-items:center; justify-content:center;
+  background:radial-gradient(circle at center,#2e0a1e 0%,#1a0a10 100%);
+  opacity:0; transition:opacity 0.5s ease;
+}
+#trans.show{ opacity:1; pointer-events:all; }
+.trans-inner{
+  display:flex; flex-direction:column; align-items:center; gap:1rem;
+}
+.trans-heart{
+  font-size:5rem;
+  animation:hbPulse 0.45s ease-in-out infinite alternate;
+  filter:drop-shadow(0 0 30px rgba(232,105,138,1));
+}
+@keyframes hbPulse{ from{transform:scale(1)} to{transform:scale(1.28)} }
+.trans-petals{
+  display:flex; gap:1rem; font-size:1.6rem;
+  animation:petRow 0.7s ease-in-out infinite alternate;
+}
+@keyframes petRow{ from{opacity:0.5;transform:scale(0.9)} to{opacity:1;transform:scale(1.05)} }
+    </style>
   </head>
   <body>
 
     <iframe id="frame" src="home.html"></iframe>
     <audio id="bgm" loop><source src="Die_with_a_smile.mp3"
         type="audio/mpeg"></audio>
-    <button id="mbtn">&#9654;</button>
+    <button id="mbtn" title="Toggle music">&#9654;</button>
+
+    <!-- Transition overlay rendered at the index level so it covers the iframe cleanly -->
+    <div id="trans">
+      <div class="trans-inner">
+        <div class="trans-heart">💗</div>
+        <div class="trans-petals">🌸 ✨ 💖 ✨ 🌸</div>
+      </div>
+    </div>
 
     <script>
-var audio = document.getElementById('bgm');
-var btn   = document.getElementById('mbtn');
-var frame = document.getElementById('frame');
+var audio   = document.getElementById('bgm');
+var btn     = document.getElementById('mbtn');
+var frame   = document.getElementById('frame');
+var trans   = document.getElementById('trans');
 var playing = false;
+var fadeInt = null;
 
-// Try autoplay immediately
-audio.play().then(function(){
-  btn.innerHTML = '&#9646;&#9646;';
-  playing = true;
-}).catch(function(){
-  // autoplay blocked — will start on first click
-});
-
-// Start on first interaction if autoplay was blocked
-document.addEventListener('click', function start(){
+/* ── Music helpers ── */
+function startMusic(){
   if(!playing){
+    audio.volume = 1;
     audio.play().then(function(){
-      btn.innerHTML = '&#9646;&#9646;';
-      playing = true;
+      btn.innerHTML='&#9646;&#9646;';
+      playing=true;
     }).catch(function(){});
   }
-  document.removeEventListener('click', start);
+}
+window.startMusicFromIframe = startMusic;
+
+function fadeMusic(targetVol, duration, cb){
+  clearInterval(fadeInt);
+  var steps   = 30;
+  var interval= duration / steps;
+  var start   = audio.volume;
+  var delta   = (targetVol - start) / steps;
+  var step    = 0;
+  fadeInt = setInterval(function(){
+    step++;
+    audio.volume = Math.max(0, Math.min(1, start + delta*step));
+    if(step >= steps){
+      clearInterval(fadeInt);
+      if(cb) cb();
+    }
+  }, interval);
+}
+
+/* ── Autoplay attempt ── */
+audio.play().then(function(){
+  btn.innerHTML='&#9646;&#9646;';
+  playing=true;
+}).catch(function(){
+  btn.title='Click to play music';
 });
 
-// Toggle button
+/* ── Start on first click anywhere ── */
+document.addEventListener('click', function startOnce(e){
+  if(e.target===btn) return;
+  startMusic();
+  document.removeEventListener('click', startOnce);
+});
+
+/* ── Toggle button ── */
 btn.addEventListener('click', function(e){
   e.stopPropagation();
   if(playing){
-    audio.pause();
-    btn.innerHTML = '&#9654;';
-    playing = false;
+    fadeMusic(0, 600, function(){ audio.pause(); playing=false; });
+    btn.innerHTML='&#9654;';
   } else {
-    audio.play();
-    btn.innerHTML = '&#9646;&#9646;';
-    playing = true;
+    audio.volume=0;
+    audio.play().then(function(){
+      btn.innerHTML='&#9646;&#9646;';
+      playing=true;
+      fadeMusic(1, 600);
+    }).catch(function(){});
   }
 });
 
-// When iframe loads a new page: hide its old music bar, intercept link clicks
+/* ── Page transition triggered by home.html door clicks ── */
+window.triggerTransition = function(href){
+  startMusic();
+  // 1. Show rose overlay
+  trans.classList.add('show');
+
+  // 2. Gently dip the music
+  // if(playing){
+  //   fadeMusic(0.35, 400);
+  // }
+
+  // 3. Navigate the iframe after the overlay is fully visible
+  setTimeout(function(){
+    frame.src = href;
+  }, 550);
+
+  // 4. Fade overlay back out after page loads (handled in frame load event)
+};
+
+/* ── iframe load handler ── */
 frame.addEventListener('load', function(){
-  try {
+  // Fade the overlay back out
+  setTimeout(function(){
+    trans.classList.remove('show');
+  }, 200);
+
+  // Restore music volume
+  if(playing) fadeMusic(1, 700);
+
+  try{
     var doc = frame.contentDocument || frame.contentWindow.document;
 
-    // Hide any leftover music bars inside pages
-    doc.querySelectorAll('.music-bar').forEach(function(el){
-      el.style.display = 'none';
+    // Remove any stray audio elements inside page files
+    doc.querySelectorAll('audio').forEach(function(el){ el.remove(); });
+    doc.querySelectorAll('.music-bar').forEach(function(el){ el.style.display='none'; });
+
+    // Cursor hearts inside iframe
+doc.addEventListener('mousemove', function(e){
+  var heart = document.createElement('div');
+  heart.innerHTML = '💗';
+  heart.style.cssText = 'position:fixed;left:'+e.clientX+'px;top:'+e.clientY+'px;pointer-events:none;font-size:12px;opacity:0.8;transition:all 1s ease;z-index:99999;';
+  doc.body.appendChild(heart);
+  setTimeout(function(){ heart.style.top=(e.clientY-40)+'px'; heart.style.opacity='0'; }, 10);
+  setTimeout(function(){ heart.remove(); }, 1000);
+});
+
+    // Start music on first click inside iframe if needed
+    doc.addEventListener('click', function iframeFirst(){
+      startMusic();
+      doc.removeEventListener('click', iframeFirst);
     });
 
-    // Intercept all link clicks so navigation stays in iframe (music never stops)
+    // Intercept nav links → keep inside iframe so music never stops
     doc.addEventListener('click', function(e){
       var a = e.target.closest('a');
       if(!a) return;
       var href = a.getAttribute('href');
       if(!href || href.charAt(0)==='#' || a.target) return;
+      // external links open normally
+      if(href.indexOf('http')===0){ return; }
       e.preventDefault();
-      var base = frame.src.substring(0, frame.src.lastIndexOf('/') + 1);
-      frame.src = href.indexOf('http') === 0 ? href : base + href;
+
+      // For page-to-page nav inside individual pages: do a smooth transition
+      trans.classList.add('show');
+      // if(playing) fadeMusic(0.35, 400);
+      setTimeout(function(){
+        frame.src = href;
+      }, 500);
     });
-  } catch(err){}
+
+  }catch(err){}
 });
-</script>
+
+// Romantic cursor hearts
+document.addEventListener("mousemove", function(e){
+  var heart=document.createElement("div");
+  heart.innerHTML="💗";
+  heart.style.cssText="position:fixed;left:"+e.clientX+"px;top:"+e.clientY+"px;pointer-events:none;font-size:12px;opacity:0.8;transition:all 1s ease;z-index:99999;";
+  document.body.appendChild(heart);
+  setTimeout(function(){ heart.style.top=(e.clientY-40)+"px"; heart.style.opacity="0"; },10);
+  setTimeout(function(){ heart.remove(); },1000);
+});
+    </script>
   </body>
 </html>

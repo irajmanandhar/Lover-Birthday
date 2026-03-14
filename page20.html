@@ -35,13 +35,43 @@
     .music-bar button{background:var(--rose);border:none;border-radius:50%;width:36px;height:36px;cursor:pointer;font-size:1rem;color:white;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
     img.full{width:100%;border-radius:14px;display:block;margin:1rem 0;object-fit:cover;}
     video.full{width:100%;border-radius:14px;display:block;margin:1rem 0;}
-  </style>
+  
+    /* ── Romantic page-entry animation ── */
+    @keyframes pageReveal {
+      0%   { opacity:0; transform:translateY(30px) scale(0.97); filter:blur(8px); }
+      60%  { filter:blur(0); }
+      100% { opacity:1; transform:translateY(0) scale(1); filter:blur(0); }
+    }
+    body > *:not(#stars):not(#petals):not(#petals-container):not(#shooting-stars):not(script):not(style) {
+      animation: pageReveal 0.9s cubic-bezier(0.165,0.84,0.44,1) forwards;
+    }
+
+    /* ── Shooting stars on every page ── */
+    #shooting-stars { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:1; overflow:hidden; }
+    .shoot {
+      position:absolute; width:2px; height:2px; border-radius:50%;
+      background:white; box-shadow:0 0 5px 1px white; opacity:0;
+      animation:shoot var(--sd) linear var(--delay) infinite;
+    }
+    .shoot::after {
+      content:''; position:absolute; top:50%; left:0; transform:translateY(-50%);
+      width:70px; height:1px;
+      background:linear-gradient(to left,rgba(255,255,255,0.85),transparent);
+    }
+    @keyframes shoot {
+      0%   { opacity:0; transform:translate(0,0) rotate(var(--ang)); }
+      6%   { opacity:1; }
+      85%  { opacity:0.7; }
+      100% { opacity:0; transform:translate(calc(var(--dx)*1px),calc(var(--dy)*1px)) rotate(var(--ang)); }
+    }
+
+    </style>
   </head>
   <body>
     <div id="stars"></div>
+    <div id="shooting-stars"></div>
     <div id="petals"></div>
-    <audio id="bgm" loop><source src="Die_with_a_smile.mp3"
-        type="audio/mpeg"></audio>
+    
     <header class="page-header">
       <p class="page-num">✨ Surprise #20 of 24 ✨</p>
       <h1 class="page-title">Another Video, Just for You 🎥</h1>
@@ -71,10 +101,21 @@
   var pe=document.getElementById('petals');
   var emojis=['🌸','🌺','🌹','💮','🌷','💐','✨','💗'];
   for(var j=0;j<18;j++){{var p=document.createElement('div');p.className='petal';p.textContent=emojis[Math.floor(Math.random()*emojis.length)];p.style.cssText='left:'+(Math.random()*100)+'%;animation-duration:'+(Math.random()*8+6).toFixed(1)+'s;animation-delay:'+(Math.random()*12).toFixed(1)+'s;font-size:'+(Math.random()*1+0.8).toFixed(1)+'rem;';pe.appendChild(p);}}
-  var audio=document.getElementById('bgm'),btn=document.getElementById('mbtn'),playing=false;
-  window.toggleMusic=function(){{if(playing){{audio.pause();btn.textContent='▶';playing=false;}}else{{audio.play().catch(function(){{}});btn.textContent='⏸';playing=true;}}}}
-  document.addEventListener('click',function(){{if(!playing){{audio.play().then(function(){{btn.textContent='⏸';playing=true;}}).catch(function(){{}});}}}}{{once:true}});
 }})();
+
+  // Shooting stars
+  (function(){
+    var ss = document.getElementById('shooting-stars');
+    if(!ss){ ss=document.createElement('div'); ss.id='shooting-stars'; document.body.insertBefore(ss,document.body.firstChild); }
+    for(var i=0;i<6;i++){
+      var sh=document.createElement('div'); sh.className='shoot';
+      var ang=28+Math.random()*18, dist=280+Math.random()*300;
+      var rad=ang*Math.PI/180;
+      sh.style.cssText='top:'+(Math.random()*55)+'%;left:'+(Math.random()*100)+'%;--sd:'+(Math.random()*6+4).toFixed(1)+'s;--delay:'+(Math.random()*16).toFixed(1)+'s;--dx:'+(Math.cos(rad)*dist).toFixed(0)+';--dy:'+(Math.sin(rad)*dist).toFixed(0)+';--ang:'+ang+'deg;';
+      ss.appendChild(sh);
+    }
+  })();
+
 </script>
   </body>
 </html>
