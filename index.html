@@ -166,14 +166,14 @@ frame.addEventListener('load', function(){
     doc.querySelectorAll('.music-bar').forEach(function(el){ el.style.display='none'; });
 
     // Cursor hearts inside iframe
-doc.addEventListener('mousemove', function(e){
-  var heart = document.createElement('div');
-  heart.innerHTML = '💗';
-  heart.style.cssText = 'position:fixed;left:'+e.clientX+'px;top:'+e.clientY+'px;pointer-events:none;font-size:12px;opacity:0.8;transition:all 1s ease;z-index:99999;';
-  doc.body.appendChild(heart);
-  setTimeout(function(){ heart.style.top=(e.clientY-40)+'px'; heart.style.opacity='0'; }, 10);
-  setTimeout(function(){ heart.remove(); }, 1000);
-});
+    doc.addEventListener('mousemove', function(e){
+      var heart = document.createElement('div');
+      heart.innerHTML = '💗';
+      heart.style.cssText = 'position:fixed;left:'+e.clientX+'px;top:'+e.clientY+'px;pointer-events:none;font-size:12px;opacity:0.8;transition:all 1s ease;z-index:99999;';
+      doc.body.appendChild(heart);
+      setTimeout(function(){ heart.style.top=(e.clientY-40)+'px'; heart.style.opacity='0'; }, 10);
+      setTimeout(function(){ heart.remove(); }, 1000);
+    });
 
     // Start music on first click inside iframe if needed
     doc.addEventListener('click', function iframeFirst(){
@@ -197,6 +197,33 @@ doc.addEventListener('mousemove', function(e){
       setTimeout(function(){
         frame.src = href;
       }, 500);
+    });
+
+    // Pause/resume music when videos play
+    doc.querySelectorAll('video').forEach(function(vid){
+      vid.addEventListener('play', function(){
+        if(playing){
+          audio.pause();
+          btn.innerHTML='&#9654;';
+          playing=false;
+        }
+      });
+      vid.addEventListener('pause', function(){
+        if(!playing){
+          audio.play().then(function(){
+            btn.innerHTML='&#9646;&#9646;';
+            playing=true;
+          }).catch(function(){});
+        }
+      });
+      vid.addEventListener('ended', function(){
+        if(!playing){
+          audio.play().then(function(){
+            btn.innerHTML='&#9646;&#9646;';
+            playing=true;
+          }).catch(function(){});
+        }
+      });
     });
 
   }catch(err){}
